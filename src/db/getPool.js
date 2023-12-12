@@ -15,6 +15,16 @@ const getPool = async () => {
     // Si la variable "pool" es undefined...
     if (!pool) {
       // Creamos una pool temporal.
+      const poolTemp = mysql.createPool({
+        host: MYSQL_HOST,
+        user: MYSQL_USER,
+        password: MYSQL_PASSWORD,
+      });
+
+      // Con el pool temporal creamos la base de datos si no existe.
+      await poolTemp.query(`CREATE DATABASE IF NOT EXISTS ${MYSQL_DATABASE}`);
+
+      // Creamos un grupo de conexiones.
       pool = mysql.createPool({
         connectionLimit: 10,
         host: MYSQL_HOST,
@@ -24,9 +34,6 @@ const getPool = async () => {
         timezone: "Z",
       });
     }
-    // creamos la base de datos desde este pool
-    await pool.query(`CREATE DATABASE IF NOT EXISTS ${MYSQL_DATABASE}`);
-    console.log("base de datos creada!");
 
     // Retornamos un pool.
     return pool;
