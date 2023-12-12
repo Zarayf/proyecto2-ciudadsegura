@@ -19,12 +19,15 @@ El administrador crea un nuevo lugar con algun problema. Los usuarios pueden esc
 ## Base de datos
 
 ### usuarios
-|-------------|----------|---------------|
-| Campo       | Tipo     |  Descripción  |
-|------------ |----------|---------------|
 
-
-
-
+|   Campo              |   Tipo       |  Descripción                          |
+|--------------------- |--------------|---------------------------------------|
+| id                   | VARCHAR(20)  | Identificador único del usuario       |
+| nombre               | VARCHAR(20)  | Nombre del usuario                    |
+| contrasenya          | VARCHAR(20)  | Contraseña del usuario                |
+| dni                  | VARCHAR(9)   | Dni del usuario                       |
+| tipo usuario         | ENUM         | Rol del usuario ("admin" o "normal")  |
+|  correo electronico  | VARCHAR(20)  | Correo electrónico del usuario        |
+|  fecha creacion      |
 
 
