@@ -21,13 +21,21 @@ El administrador crea un nuevo lugar con algun problema. Los usuarios pueden esc
 ### usuarios
 
 |   Campo              |   Tipo       |  Descripción                          |
-|--------------------- |--------------|---------------------------------------|
+|----------------------|--------------|---------------------------------------|
 | id                   | VARCHAR(20)  | Identificador único del usuario       |
 | nombre               | VARCHAR(20)  | Nombre del usuario                    |
-| contrasenya          | VARCHAR(20)  | Contraseña del usuario                |
+| contraseña           | VARCHAR(20)  | Contraseña del usuario                |
 | dni                  | VARCHAR(9)   | Dni del usuario                       |
 | tipo usuario         | ENUM         | Rol del usuario ("admin" o "normal")  |
-|  correo electronico  | VARCHAR(20)  | Correo electrónico del usuario        |
-|  fecha creacion      |
+| correo electronico   | VARCHAR(20)  | Correo electrónico del usuario        |
+| fecha creación       | DATETIME     | Fecha y hora de creación del usuario  |
+| codigo registro      | VARCHAR(30)  | Código de registro del usuario        |
+| recup.contraseña     | VARCHAR(30)  | Código de recuperación de contraseña  |
+| fecha modificación   | DATETIME     | Fecha/hora de la última modificación  |
 
+### ciudad
+
+|   Campo              |   Tipo       |  Descripción                          |
+|----------------------|--------------|---------------------------------------|
+| id                   | INT          | Identificador única de la ciudad      |
 
