@@ -19,7 +19,7 @@ El administrador crea un nuevo lugar con algun problema. Los usuarios pueden esc
 ## Base de datos
 
 ### usuarios
-
+|-------------|----------|---------------|
 | Campo       | Tipo     |  Descripción  |
 |------------ |----------|---------------|
 
