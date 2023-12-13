@@ -21,38 +21,36 @@ async function modifiDb() {
 
     await pool.query(`
       CREATE TABLE IF NOT EXISTS usuario (
-        id_usuario INT PRIMARY KEY AUTO_INCREMENT,
+        id INT PRIMARY KEY AUTO_INCREMENT,
         nombre_usuario VARCHAR(20) UNIQUE NOT NULL,
-        contrasenya VARCHAR(20) NOT NULL,
-        dni VARCHAR(9) UNIQUE NOT NULL,
+        contrasenya VARCHAR(100) NOT NULL,
         tipo_usuario ENUM('admin', 'normal') DEFAULT 'normal',
-        correo_electronico VARCHAR(20) UNIQUE NOT NULL,
+        correo_electronico VARCHAR(100) UNIQUE NOT NULL,
         fecha_creacion DATETIME DEFAULT CURRENT_TIMESTAMP,
-        codigo_registro VARCHAR(30),
         codigo_recuperacion_contrasenya VARCHAR(30),
         fecha_modificacion DATETIME ON UPDATE CURRENT_TIMESTAMP 
       );
       `);
 
     await pool.query(`CREATE TABLE IF NOT EXISTS ciudad (
-      id_ciudad INT PRIMARY KEY AUTO_INCREMENT,
+      id INT PRIMARY KEY AUTO_INCREMENT,
       nombre VARCHAR(20) UNIQUE NOT NULL
      )`);
 
     await pool.query(`
       CREATE TABLE IF NOT EXISTS barrio(
-        id_barrio INT PRIMARY KEY AUTO_INCREMENT,
+        id INT PRIMARY KEY AUTO_INCREMENT,
         id_usuario INT NOT NULL,
         id_ciudad INT NOT NULL,
         nombre VARCHAR(40) NOT NULL, 
-        FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario) ON DELETE CASCADE,
-        FOREIGN KEY (id_ciudad) REFERENCES ciudad(id_ciudad) ON DELETE CASCADE
+        FOREIGN KEY (id_usuario) REFERENCES usuario(id) ON DELETE CASCADE,
+        FOREIGN KEY (id_ciudad) REFERENCES ciudad(id) ON DELETE CASCADE
       );
       `);
 
     await pool.query(`
       CREATE TABLE IF NOT EXISTS problema(
-        id_problema INT PRIMARY KEY AUTO_INCREMENT,
+        id INT PRIMARY KEY AUTO_INCREMENT,
         id_barrio INT NOT NULL,
         titulo VARCHAR(30) NOT NULL,
         descripcion TEXT NOT NULL,
@@ -61,24 +59,24 @@ async function modifiDb() {
         foto VARCHAR(100), 
         detalle_lugar VARCHAR(100) NOT NULL,
         estado_problema ENUM('Resuelto', 'Pendiente') DEFAULT 'Pendiente',
-        FOREIGN KEY (id_barrio) REFERENCES barrio (id_barrio) ON DELETE CASCADE
+        FOREIGN KEY (id_barrio) REFERENCES barrio (id) ON DELETE CASCADE
       );
       `);
 
     await pool.query(`
       CREATE TABLE IF NOT EXISTS denunciar_problema (
-        id_problema_denunciado INT PRIMARY KEY AUTO_INCREMENT,
+        id INT PRIMARY KEY AUTO_INCREMENT,
         id_usuario INT NOT NULL,
         id_barrio INT NOT NULL,
         fecha_denuncia DATETIME DEFAULT CURRENT_TIMESTAMP,
-        FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario) ON DELETE CASCADE,
-        FOREIGN KEY (id_barrio) REFERENCES barrio(id_barrio) ON DELETE CASCADE
+        FOREIGN KEY (id_usuario) REFERENCES usuario(id) ON DELETE CASCADE,
+        FOREIGN KEY (id_barrio) REFERENCES barrio(id) ON DELETE CASCADE
       );
       `);
     console.log("Tablas creadas correctamente");
     //Creamos usuario administrador
-    await pool.query(`INSERT INTO usuario (nombre_usuario, contrasenya, dni, tipo_usuario, correo_electronico ) VALUES ('admin',
-    '1@2B3C4D5e','12345678z', 'admin', 'admin@correo.com')
+    await pool.query(`INSERT INTO usuario (nombre_usuario, contrasenya, tipo_usuario, correo_electronico ) VALUES ('admin',
+    '1a4D5p$', 'admin', 'admin@correo.com')
     `);
     //Creamos Ciudad
     await pool.query(`INSERT INTO ciudad(nombre) VALUES ('narnia')
