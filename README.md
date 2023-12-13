@@ -33,7 +33,7 @@ El administrador crea un nuevo lugar con algun problema. Los usuarios pueden esc
 | recup.contraseña     | VARCHAR(30)  | Código de recuperación de contraseña  |
 | fecha modificación   | DATETIME     | Fecha/hora de la última modificación  |
 
-### ciudad
+### ciudades
 
 |   Campo              |   Tipo       |  Descripción                          |
 |----------------------|--------------|---------------------------------------|
