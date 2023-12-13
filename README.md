@@ -38,4 +38,4 @@ El administrador crea un nuevo lugar con algun problema. Los usuarios pueden esc
 |   Campo              |   Tipo       |  Descripción                          |
 |----------------------|--------------|---------------------------------------|
 | id                   | INT          | Identificador única de la ciudad      |
-
+| nombre | VARCHAR(20) | 
