@@ -11,16 +11,16 @@ import {
 
 // Función que realiza una consulta a la base de datos para crear un nuevo usuario.
 const insertUserModel = async (
-  nombre_usuario,
-  contrasenya,
-  correo_electronico
-) => {
+  user_name, 
+  pass, 
+  email) => {
   const pool = await getPool();
 
   // Buscamos en la base de datos algún usuario con ese nombre.
-  let [users] = await pool.query(
-    `SELECT id FROM usuario WHERE nombre_usuario = ?`,
-    [nombre_usuario]
+  let [user] = await pool.query(
+    `
+  SELECT id_user FROM user WHERE user_name = ?`,
+    [user_name]
   );
 
   // Si existe algún usuario con ese nombre lanzamos un error.
@@ -29,9 +29,9 @@ const insertUserModel = async (
   }
 
   // Buscamos en la base de datos algún usuario con ese email.
-  [users] = await pool.query(
-    `SELECT id FROM usuario WHERE correo_electronico = ?`,
-    [correo_electronico]
+  [user] = await pool.query(
+    `SELECT id_user FROM user WHERE email = ?`,
+    [email]
   );
 
   // Si existe algún usuario con ese email lanzamos un error.
@@ -39,12 +39,12 @@ const insertUserModel = async (
     emailAlreadyRegisteredError();
   }
   // Encriptamos la contraseña.
-  const hashedPass = await bcrypt.hash(contrasenya, 8);
+  const hashedPass = await bcrypt.hash(pass, 8);
 
   // Insertamos el usuario.
   await pool.query(
-    `INSERT INTO usuario (nombre_usuario, contrasenya, correo_electronico) VALUES(?, ?, ?)`,
-    [nombre_usuario, hashedPass, correo_electronico]
+    `INSERT INTO user (user_name, pass, email) VALUES(?, ?, ?)`,
+    [user_name, hashedPass, email]
   );
 };
 
