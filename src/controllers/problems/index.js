@@ -1,2 +1,2 @@
-import { newProblemsController } from "../problems.js";
+import newProblemsController from "./newProblemsController.js";
 export { newProblemsController };

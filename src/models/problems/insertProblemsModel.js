@@ -1,5 +1,3 @@
-// Importamos las dependencias.
-
 // Importamos la función que devuelve una conexión con la base de datos.
 import getPool from "../../db/getPool.js";
 
@@ -16,11 +14,11 @@ const insertProblemsModel = async (
   // Insertamos la entrada.
   const problem = await pool.query(
     `INSERT INTO problem( 
-            id_district ,
+            id_district,
             title,
             description,
             photo,
-            place_detail,
+            place_detail
             ) VALUES(?, ?, ?, ?, ?)`,
     [id_district, title, description, photo, place_detail]
   );

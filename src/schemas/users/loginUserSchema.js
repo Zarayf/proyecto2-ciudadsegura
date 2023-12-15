@@ -6,9 +6,13 @@ import joiErrorMessages from "../joiErrorMessages.js";
 
 // Creamos el esquema de Joi donde comprobamos todas las propiedades necesarias.
 const loginUserSchema = joi.object({
+  pass: joi
+    .string()
+    .pattern(
+      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[¡!$%^&*()_+|~=`{}:";'<>¿?,.])[a-zA-Z0-9¡!$%^&*()_+|~=`{}:";'<>¿?,.]{8,}$/
+    )
+    .required(),
   email: joi.string().email().required().messages(joiErrorMessages),
-  password: joi.string().required().messages(joiErrorMessages),
 });
 
 export default loginUserSchema;
-console.log("holaaaaaaaaaaa");

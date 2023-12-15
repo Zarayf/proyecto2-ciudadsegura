@@ -1,23 +1,20 @@
 // Importamos las dependencias.
 import bcrypt from "bcrypt";
-import { v4 as uuid } from "uuid";
+// import { v4 as uuid } from "uuid";
 
 // Importamos la función que devuelve una conexión con la base de datos.
 import getPool from "../../db/getPool.js";
-// importamos los errores
-import {
-  userAlreadyRegisteredError,
-  emailAlreadyRegisteredError,
-} from "../../services/errorService.js";
+
+// Importamos los errores.
+import { emailAlreadyRegisteredError } from "../../services/errorService.js";
 
 // Función que realiza una consulta a la base de datos para crear un nuevo usuario.
-const insertUserModel = async (user_name, password, email) => {
+const insertUserModel = async (user_name, pass, email) => {
   const pool = await getPool();
 
   // Buscamos en la base de datos algún usuario con ese nombre.
   let [user] = await pool.query(
-    `
-  SELECT id_user FROM user WHERE user_name = ?`,
+    `SELECT id_user FROM user WHERE user_name = ?`,
     [user_name]
   );
 
@@ -35,12 +32,13 @@ const insertUserModel = async (user_name, password, email) => {
   if (user.length > 0) {
     emailAlreadyRegisteredError();
   }
+
   // Encriptamos la contraseña.
-  const hashedPass = await bcrypt.hash(password, 10);
+  const hashedPass = await bcrypt.hash(pass, 10);
 
   // Insertamos el usuario.
   await pool.query(
-    `INSERT INTO user ( user_name, password, email) VALUES( ?, ?, ? )`,
+    `INSERT INTO user( user_name, pass, email ) VALUES( ?, ?, ?)`,
     [user_name, hashedPass, email]
   );
 };

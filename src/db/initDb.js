@@ -23,7 +23,7 @@ async function modifiDb() {
       CREATE TABLE IF NOT EXISTS  user (
         id_user INT PRIMARY KEY AUTO_INCREMENT,
         user_name VARCHAR(20) UNIQUE NOT NULL,
-        password VARCHAR(100) NOT NULL,
+        pass VARCHAR(100) NOT NULL,
         user_type ENUM('admin', 'normal') DEFAULT 'normal',
         email VARCHAR(100) UNIQUE NOT NULL,
         registrationCode CHAR(30),
@@ -76,7 +76,7 @@ async function modifiDb() {
       `);
     console.log("Tablas creadas correctamente");
     //Creamos usuario administrador
-    await pool.query(`INSERT INTO  user (user_name, password, user_type, email ) VALUES
+    await pool.query(`INSERT INTO  user (user_name, pass, user_type, email ) VALUES
      ('admin','1a4D5p$','admin','admin@correo.com')
     `);
     //Creamos city
