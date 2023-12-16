@@ -21,3 +21,10 @@ export const invalidCredentialsError = () => {
     message: "Credenciales inválidas",
   };
 };
+export const notAuthenticatedError = () => {
+  throw {
+    httpStatus: 401, // Unauthorized
+    code: "NOT_AUTHENTICATED",
+    message: `Debes enviar un token en el header 'Authorization'`,
+  };
+};

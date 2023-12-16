@@ -5,15 +5,9 @@ import express from "express";
 const router = express.Router();
 
 // Importamos las funciones controladoras finales.
-import {
-  newUserController,
-  loginController,
-} from "../controllers/users/index.js";
-
-// Crear un usuario
-router.post("/user/register", newUserController);
+import { newProblemsController } from "../controllers/problems/index.js";
 
 // Acceso administrador
-router.post("/user/login", loginController);
+router.post("/problems/", newProblemsController);
 
 export default router;

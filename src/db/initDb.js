@@ -26,6 +26,7 @@ async function modifiDb() {
         pass VARCHAR(100) NOT NULL,
         user_type ENUM('admin', 'normal') DEFAULT 'normal',
         email VARCHAR(100) UNIQUE NOT NULL,
+        registrationCode CHAR(30),
         create_date DATETIME DEFAULT CURRENT_TIMESTAMP,
         recovery_code VARCHAR(30),
         update_date DATETIME ON UPDATE CURRENT_TIMESTAMP 

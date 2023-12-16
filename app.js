@@ -10,9 +10,9 @@ import routes from "./src/routes/index.js";
 import { PORT } from "./env.js";
 // creamos server express y utilizamos morgan
 const app = express();
-app.use(express.json());
 app.use(morgan("dev"));
-
+app.use(express.static("public"));
+app.use(express.json());
 app.use(fileUpload());
 app.use(routes);
 

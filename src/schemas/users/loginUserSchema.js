@@ -5,16 +5,14 @@ import joi from "joi";
 import joiErrorMessages from "../joiErrorMessages.js";
 
 // Creamos el esquema de Joi donde comprobamos todas las propiedades necesarias.
-const newUserSchema = joi.object({
-  user_name: joi.string().required().messages(joiErrorMessages),
+const loginUserSchema = joi.object({
   pass: joi
     .string()
     .pattern(
       /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[¡!$%^&*()_+|~=`{}:";'<>¿?,.])[a-zA-Z0-9¡!$%^&*()_+|~=`{}:";'<>¿?,.]{8,}$/
     )
-    .required()
-    .messages(joiErrorMessages),
+    .required(),
   email: joi.string().email().required().messages(joiErrorMessages),
 });
 
-export default newUserSchema;
+export default loginUserSchema;
