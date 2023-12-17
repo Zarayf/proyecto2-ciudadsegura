@@ -1,2 +1,8 @@
 import newProblemsController from "./newProblemsController.js";
-export { newProblemsController };
+import editProblemsController from "./editProblemsController.js";
+import listProblemsController from "./listProblemsController.js";
+export {
+  newProblemsController,
+  editProblemsController,
+  listProblemsController,
+};
