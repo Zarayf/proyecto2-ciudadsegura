@@ -37,7 +37,7 @@ El administrador crea un nuevo lugar con algun problema. Los usuarios pueden esc
 |----------------------|--------------|---------------------------------------|
 |  id_city             | INT          | Identificador única de la ciudad      |
 | city_name| VARCHAR(20) | Nombre de la ciudad |
-| 
+
 
 ### district
 
