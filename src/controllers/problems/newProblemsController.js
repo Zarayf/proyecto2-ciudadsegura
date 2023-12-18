@@ -8,7 +8,7 @@ import * as url from "url";
 //fileURLToPath sirve para que el formato valga para todos (windows, mac, linux)
 //creo una nueva ruta y le digo que salga de estas dos carpetas y vaya a la raiz
 const __dirname = url.fileURLToPath(new URL("../../", import.meta.url));
-
+import sharp from "sharp";
 import path from "path";
 //import sharp from "sharp";
 import { nanoid } from "nanoid";
@@ -40,9 +40,11 @@ const newProblemsController = async (req, res, next) => {
       // Creo el directorio si no existe
       await createdpath(uploadsDir);
 
+ lidiapdiaz
       /*Redimensionar la imagen: esta comentado porque esta dando fallo y no sabemos porque
+ 
       const image = sharp(req.files.photo.data);
-      image.resize(500);*/
+      image.resize(50);
 
       // Guardo la imagen con un nombre aleatorio en el directorio uploads
       imageFileName = `${nanoid(24)}.jpg`;

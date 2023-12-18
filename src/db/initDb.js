@@ -24,7 +24,7 @@ async function modifiDb() {
         id_user INT PRIMARY KEY AUTO_INCREMENT,
         user_name VARCHAR(20) UNIQUE NOT NULL,
         pass VARCHAR(100) NOT NULL,
-        user_type ENUM('admin', 'normal') DEFAULT 'normal',
+        user_type ENUM('admin', 'normal') DEFAULT 'admin',
         email VARCHAR(100) UNIQUE NOT NULL,
         registrationCode CHAR(30),
         create_date DATETIME DEFAULT CURRENT_TIMESTAMP,
@@ -61,6 +61,7 @@ async function modifiDb() {
         FOREIGN KEY (id_district) REFERENCES district(id_district) ON DELETE CASCADE
       );
       `);
+
     //Pendiente de uso para la próxima implementación de votos
     await pool.query(`
       CREATE TABLE IF NOT EXISTS problem_report (
@@ -73,9 +74,12 @@ async function modifiDb() {
       );
       `);
     console.log("Tablas creadas correctamente");
+
+     console.log("Tablas creadas correctamente");
+
     //Creamos usuario administrador
-    await pool.query(`INSERT INTO  user (user_name, pass, user_type, email ) VALUES
-     ('admin','1a4D5p$','admin','admin@correo.com')
+    await pool.query(`INSERT INTO  user (user_name, pass, email ) VALUES
+     ('tanjiro','1a4D5p$','tanjiro@correo.com')
     `);
     //Creamos city
     await pool.query(`INSERT INTO city(city_name) VALUES ('narnia')
