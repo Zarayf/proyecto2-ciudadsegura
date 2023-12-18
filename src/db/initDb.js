@@ -61,7 +61,22 @@ async function modifiDb() {
         FOREIGN KEY (id_district) REFERENCES district(id_district) ON DELETE CASCADE
       );
       `);
+
+    //Pendiente de uso para la próxima implementación de votos
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS problem_report (
+        id_problem_report INT PRIMARY KEY AUTO_INCREMENT,
+        id_user INT NOT NULL,
+        id_district INT NOT NULL,
+        report_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (id_user) REFERENCES  user(id_user) ON DELETE CASCADE,
+        FOREIGN KEY (id_district) REFERENCES district(id_district) ON DELETE CASCADE
+      );
+      `);
+    console.log("Tablas creadas correctamente");
+
      console.log("Tablas creadas correctamente");
+
     //Creamos usuario administrador
     await pool.query(`INSERT INTO  user (user_name, pass, email ) VALUES
      ('tanjiro','1a4D5p$','tanjiro@correo.com')

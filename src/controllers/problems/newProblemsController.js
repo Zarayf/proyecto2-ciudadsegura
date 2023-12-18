@@ -40,6 +40,9 @@ const newProblemsController = async (req, res, next) => {
       // Creo el directorio si no existe
       await createdpath(uploadsDir);
 
+ lidiapdiaz
+      /*Redimensionar la imagen: esta comentado porque esta dando fallo y no sabemos porque
+ 
       const image = sharp(req.files.photo.data);
       image.resize(50);
 
