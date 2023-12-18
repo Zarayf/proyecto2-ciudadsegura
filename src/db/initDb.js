@@ -40,7 +40,6 @@ async function modifiDb() {
     await pool.query(`
       CREATE TABLE IF NOT EXISTS district (
         id_district INT PRIMARY KEY AUTO_INCREMENT,
-        id_user INT NOT NULL,
         id_city INT NOT NULL,
         district_name VARCHAR(40) NOT NULL, 
         FOREIGN KEY (id_user) REFERENCES  user(id_user) ON DELETE CASCADE,
@@ -62,18 +61,7 @@ async function modifiDb() {
         FOREIGN KEY (id_district) REFERENCES district(id_district) ON DELETE CASCADE
       );
       `);
-
-    await pool.query(`
-      CREATE TABLE IF NOT EXISTS problem_report (
-        id_problem_report INT PRIMARY KEY AUTO_INCREMENT,
-        id_user INT NOT NULL,
-        id_district INT NOT NULL,
-        report_date DATETIME DEFAULT CURRENT_TIMESTAMP,
-        FOREIGN KEY (id_user) REFERENCES  user(id_user) ON DELETE CASCADE,
-        FOREIGN KEY (id_district) REFERENCES district(id_district) ON DELETE CASCADE
-      );
-      `);
-    console.log("Tablas creadas correctamente");
+     console.log("Tablas creadas correctamente");
     //Creamos usuario administrador
     await pool.query(`INSERT INTO  user (user_name, pass, user_type, email ) VALUES
      ('admin','1a4D5p$','admin','admin@correo.com')
