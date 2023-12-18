@@ -43,7 +43,6 @@ async function modifiDb() {
         id_district INT PRIMARY KEY AUTO_INCREMENT,
         id_city INT NOT NULL,
         district_name VARCHAR(40) NOT NULL, 
-        FOREIGN KEY (id_user) REFERENCES  user(id_user) ON DELETE CASCADE,
         FOREIGN KEY (id_city) REFERENCES city(id_city) ON DELETE CASCADE
       );
       `);
@@ -71,12 +70,12 @@ async function modifiDb() {
     await pool.query(`INSERT INTO city(city_name) VALUES ('narnia')
     `);
     //Creamos districts
-    await pool.query(`INSERT INTO district (id_user, id_city, district_name) VALUES 
-      (1,1,'Bosque de los Árboles Conversadores'),
-      (1,1,'Cair Paravel'),
-      (1,1,'Archenland'),
-      (1,1,'Montañas del León'),
-      (1,1,'Islas Solitarias')
+    await pool.query(`INSERT INTO district (id_city, district_name) VALUES 
+      (1,'Bosque de los Árboles Conversadores'),
+      (1,'Cair Paravel'),
+      (1,'Archenland'),
+      (1,'Montañas del León'),
+      (1,'Islas Solitarias')
     `);
     console.log("Datos creados correctamente");
   } catch (e) {
