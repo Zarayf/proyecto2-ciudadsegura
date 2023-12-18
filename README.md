@@ -11,10 +11,10 @@ El administrador crea un nuevo lugar con algun problema. Los usuarios pueden esc
 2. Guardar el archivo __.env.js__ como __.env__ y cubrir los datos necesarios.
 
 
-3. Ejecutar __npm run initDb__ para crear las tablas necesarias en la base de datos.
+3. Ejecutar __npm run db__ para crear las tablas necesarias en la base de datos.
 
 
-4. Ejecutar __npm run__ dev para lanzar el servidor.
+4. Ejecutar __npm run dev__ para lanzar el servidor.
 
 ## Base de datos
 
