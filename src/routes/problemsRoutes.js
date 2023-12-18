@@ -11,11 +11,13 @@ import {
   listProblemsController,
 } from "../controllers/problems/index.js";
 
+import { authUser } from "../middleware/authUser.js";
+
 // Acceso administrador para crear problema
-router.post("/problems/", newProblemsController);
+router.post("/problems/", authUser, newProblemsController);
 
 //Acceso admin para editar problema
-router.put("/problems/:id_problem", editProblemsController);
+router.put("/problems/:id_problem", authUser, editProblemsController);
 
 //Consultar problemas indicando un barrio (añado /districts/ para distinguir de lo anterior)
 router.get("/problems/districts/:id_district", listProblemsController);

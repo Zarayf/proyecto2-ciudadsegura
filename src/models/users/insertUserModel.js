@@ -6,7 +6,10 @@ import bcrypt from "bcrypt";
 import getPool from "../../db/getPool.js";
 
 // Importamos los errores.
-import { emailAlreadyRegisteredError } from "../../services/errorService.js";
+import {
+  emailAlreadyRegisteredError,
+  userAlreadyRegisteredError,
+} from "../../services/errorService.js";
 
 // Función que realiza una consulta a la base de datos para crear un nuevo usuario.
 const insertUserModel = async (user_name, pass, email) => {
