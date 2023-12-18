@@ -14,6 +14,7 @@ app.use(morgan("dev"));
 app.use(express.static("public"));
 app.use(express.json());
 app.use(fileUpload());
+app.use("/uploads", express.static("./uploads"));
 app.use(routes);
 
 // ponemos a escuchar el servidor
