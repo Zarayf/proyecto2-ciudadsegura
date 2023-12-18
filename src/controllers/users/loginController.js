@@ -12,12 +12,8 @@ import { invalidCredentialsError } from "../../services/errorService.js";
 const loginController = async (req, res, next) => {
   try {
     const { email, pass } = req.body;
-
     if (!email || !pass) {
-      throw invalidCredentialsError(
-        "Debes enviar un email y una password",
-        400
-      );
+      throw invalidCredentialsError;
     }
 
     // Recojo los datos de la base de datos del usuario con ese email
@@ -40,12 +36,11 @@ const loginController = async (req, res, next) => {
 
     // Envío el token
     res.send({
-      status: `Bienvenido ${user.user_name}`,
+      status: `Bienvenid@ ${user.user_name}`,
       data: token,
     });
   } catch (error) {
     next(error);
   }
 };
-
 export default loginController;

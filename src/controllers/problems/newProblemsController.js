@@ -1,19 +1,24 @@
 // Importamos los modelos.
 import insertProblemsModel from "../../models/problems/insertProblemsModel.js";
-// import fs from 'fs/promises';
+//importamos modulo fs para crear directorio y poder guardar la foto ahi
+import fs from "fs/promises";
 
-import path from "path";
+//Como __dirname no está en ES modules:
+import * as url from "url";
+//fileURLToPath sirve para que el formato valga para todos (windows, mac, linux)
+//creo una nueva ruta y le digo que salga de estas dos carpetas y vaya a la raiz
+const __dirname = url.fileURLToPath(new URL("../../", import.meta.url));
 import sharp from "sharp";
+import path from "path";
+//import sharp from "sharp";
 import { nanoid } from "nanoid";
 // Importamos los servicios.
 import validateSchemaUtil from "../../utils/validateSchemaUtil.js";
 
-//  ! QUEDA EL ESQUEMA -hecho :)
-//Y VALIDAR LA FUNCION CONTROLADORA Y CAMBIAR PASSWORD POR PASS
 // Importamos el esquema.
 import newProblemsSchemas from "../../schemas/problems/newProblemsSchemas.js";
-// ! para crear el directorio lo usamos aqui por que no nos funciona la importacion
-// ! por ahora lo dejamos asi :(
+//  para crear el directorio lo usamos aqui por que no nos funciona la importacion
+//  por ahora lo dejamos asi :(
 const createdpath = async (path) => {
   try {
     await fs.access(path);
@@ -21,46 +26,52 @@ const createdpath = async (path) => {
     await fs.mkdir(path);
   }
 };
-// import createdpath from "./service.js";
 
 // Función controladora final que agrega una nueva entrada.
 const newProblemsController = async (req, res, next) => {
   try {
     const { id_district, title, description, photo, place_detail } = req.body;
-
-    // Validamos el body con Joi. Fusionamos en un solo objeto las propiedades de body y de files.
-    await validateSchemaUtil(newProblemsSchemas, Object.assign(req.body));
-    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    photo;
-
-    if (req.files && req.files.image) {
+    let imageFileName;
+    //si en la peticion hay un archivo y el archivo se llama photo(en postman poner lo mismo)
+    if (req.files && req.files.photo) {
       // Creo el path del directorio uploads
-      const uploadsDir = path.join(__dirname, "../uploads");
+      const uploadsDir = path.join(__dirname, "/uploads");
 
       // Creo el directorio si no existe
       await createdpath(uploadsDir);
 
-      // Procesar la imagen
-      const image = sharp(req.files.image.data);
-      image.resize(1000);
+      const image = sharp(req.files.photo.data);
+      image.resize(50);
 
       // Guardo la imagen con un nombre aleatorio en el directorio uploads
-      photo = `${nanoid(24)}.jpg`;
+      imageFileName = `${nanoid(24)}.jpg`;
 
-      await image.toFile(path.join(uploadsDir, photo));
+      //Guardamos la ruta de la imagen en una constante
+      const imgPath = path.join(uploadsDir, imageFileName);
+
+      //Guardamos la imagen en la carpeta uploads.
+      //Usamos el modulo fs nativo de node para poner la foto en uploads
+      const moveImg = async (path, photo) => {
+        try {
+          await fs.writeFile(path, photo);
+        } catch {
+          console.error("No se pudo guardar la imagen");
+        }
+      };
+      let photo = req.files.photo; //guardo en constante photo la imagen recibida en body
+      await moveImg(imgPath, photo.data); //del objeto photo usamos propiedad data para que genere la imagen
     }
+    // Validamos el body con Joi. Fusionamos en un solo objeto las propiedades de body y de files.
+    await validateSchemaUtil(newProblemsSchemas, Object.assign(req.body));
 
     // Insertamos la entrada y obtenemos el id que se le ha asignado.
     const problem = await insertProblemsModel(
       id_district,
       title,
       description,
-      photo,
+      imageFileName,
       place_detail
-      //req.user.id lo comento porque no usamos el id del usuario
     );
-
-    console.log(problem);
 
     res.send({
       status: "ok",
@@ -69,9 +80,8 @@ const newProblemsController = async (req, res, next) => {
           id_district,
           title,
           description,
-          photo,
+          imageFileName,
           place_detail,
-          //userId: req.user.id, lo comento porque no usamos el id del usuario
           createdAt: new Date(),
         },
       },

@@ -7,16 +7,21 @@ import fileUpload from "express-fileupload";
 
 //  importamos las rutas
 import routes from "./src/routes/index.js";
+import errorController from "./src/controllers/errores/errorController.js";
 import { PORT } from "./env.js";
 // creamos server express y utilizamos morgan
 const app = express();
 app.use(morgan("dev"));
-app.use(express.static("public"));
+
+// usamos express para recibir leer los datos que lleguen en json y en formato filedata
 app.use(express.json());
 app.use(fileUpload());
+// indicamos a express la ruta del archivo estatico
 app.use("/uploads", express.static("./uploads"));
+// usamos e indica el router
 app.use(routes);
-
+// le indicamos a express el controlador de errores
+app.use(errorController);
 // ponemos a escuchar el servidor
 app.listen(PORT, () => {
   console.log(`servidor escuchando en http:localhost:${PORT}`);
