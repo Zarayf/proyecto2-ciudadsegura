@@ -1,8 +1,8 @@
 // Importamos joi.
-import joi from "joi";
+import joi from 'joi';
 
 // Importamos los mensajes de error personalizados.
-import joiErrorMessages from "../joiErrorMessages.js";
+import joiErrorMessages from '../joiErrorMessages.js';
 
 // Creamos el esquema de Joi donde comprobamos todas las propiedades necesarias.
 const newProblemsSchema = joi.object({

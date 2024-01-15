@@ -1,13 +1,13 @@
 // Importamos las dependencias.
-import jwt from "jsonwebtoken";
+import jwt from 'jsonwebtoken';
 
 // Importamos los errores.
 import {
   notAuthenticatedError,
   invalidCredentialsError,
-} from "../services/errorService.js";
+} from '../services/errorService.js';
 
-import { SECRET } from "../../env.js";
+import { SECRET } from '../../env.js';
 
 // Función controladora intermedia que desencripta el token y crea la propiedad "req.user".
 // Si no hay token lanza un error.
@@ -20,7 +20,7 @@ const authUser = async (req, res, next) => {
       notAuthenticatedError();
     }
 
-    const token = authorization.split(" ")[1];
+    const token = authorization.split(' ')[1];
 
     // Variable que almacenará la info del token.
     let tokenInfo;
