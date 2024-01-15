@@ -1,12 +1,12 @@
 // Importamos las dependencias.
-import randomstring from "randomstring";
+import randomstring from 'randomstring';
 
 // Importamos los modelos.
-import selectUserByEmailModel from "../../models/users/selectUserByEmailModel.js";
-import updateRecoverPassModel from "../../models/users/updateRecoverPassModel.js";
+import selectUserByEmailModel from '../../models/users/selectUserByEmailModel.js';
+import updateRecoverPassModel from '../../models/users/updateRecoverPassModel.js';
 
 // Importamos los errores.
-import { notFoundError } from "../../services/errorService.js";
+import { notFoundError } from '../../services/errorService.js';
 
 // Función controladora final que valida a un usuario recién registrado.
 const sendRecoverPassController = async (req, res, next) => {
@@ -20,7 +20,7 @@ const sendRecoverPassController = async (req, res, next) => {
 
     // Si no existe un usuario con ese email lanzamos un error.
     if (!user) {
-      notFoundError("usuario");
+      notFoundError('usuario');
     }
 
     // Generamos el código de recuperación de contraseña.
@@ -30,8 +30,8 @@ const sendRecoverPassController = async (req, res, next) => {
     await updateRecoverPassModel(email, recovery_code);
 
     res.send({
-      status: "ok",
-      message: "Correo de recuperación de contraseña enviado",
+      status: 'ok',
+      message: 'Correo de recuperación de contraseña enviado',
     });
   } catch (err) {
     next(err);

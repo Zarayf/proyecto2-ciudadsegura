@@ -1,10 +1,9 @@
 // Importamos la función que devuelve una conexión con la base de datos.
-import getPool from "../../db/getPool.js";
+import getPool from '../../db/getPool.js';
 
 const selectAllProblemsModel = async (id_district) => {
   const pool = await getPool();
 
-  // Obtenemos el listado de entradas.
   const [problems] = await pool.query(
     `
                 SELECT 
@@ -15,8 +14,9 @@ const selectAllProblemsModel = async (id_district) => {
                     P.photo,
                     P.place_detail,
                     P.problem_status
-                FROM problem P
-            `
+                FROM problem P WHERE P.id_district= ?
+            `,
+    [id_district]
   );
 
   return problems;

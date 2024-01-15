@@ -1,7 +1,7 @@
 // sacamos la variable del namede la DB
-import { MYSQL_DATABASE } from "../../env.js";
+import { MYSQL_DATABASE } from '../../env.js';
 // importamos pool de conexiones
-import getPool from "./getPool.js";
+import getPool from './getPool.js';
 
 //Funcion para crear tablas y hacer inserts
 async function modifiDb() {
@@ -24,7 +24,8 @@ async function modifiDb() {
         id_user INT PRIMARY KEY AUTO_INCREMENT,
         user_name VARCHAR(20) UNIQUE NOT NULL,
         pass VARCHAR(100) NOT NULL,
-        user_type ENUM('admin', 'normal') DEFAULT 'admin',
+        pass VARCHAR(100) NOT NULL,
+        user_type ENUM('admin', 'normal') DEFAULT 'normal',
         email VARCHAR(100) UNIQUE NOT NULL,
         registrationCode CHAR(30),
         create_date DATETIME DEFAULT CURRENT_TIMESTAMP,
@@ -74,7 +75,7 @@ async function modifiDb() {
         FOREIGN KEY (id_district) REFERENCES district(id_district) ON DELETE CASCADE
       );
       `);
-    console.log("Tablas creadas correctamente");
+    console.log('Tablas creadas correctamente');
     //Creamos usuario administrador
     await pool.query(`INSERT INTO  user (user_name, pass, email ) VALUES
      ('tanjiro','1a4D5p$','tanjiro@correo.com')
@@ -90,7 +91,7 @@ async function modifiDb() {
       (1,1,'Montañas del León'),
       (1,1,'Islas Solitarias')
     `);
-    console.log("Datos creados correctamente");
+    console.log('Datos creados correctamente');
   } catch (e) {
     console.log(e.message);
   } finally {
