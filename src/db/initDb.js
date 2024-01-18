@@ -24,7 +24,6 @@ async function modifiDb() {
         id_user INT PRIMARY KEY AUTO_INCREMENT,
         user_name VARCHAR(20) UNIQUE NOT NULL,
         pass VARCHAR(100) NOT NULL,
-        pass VARCHAR(100) NOT NULL,
         user_type ENUM('admin', 'normal') DEFAULT 'normal',
         email VARCHAR(100) UNIQUE NOT NULL,
         registrationCode CHAR(30),

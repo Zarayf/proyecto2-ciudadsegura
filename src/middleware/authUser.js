@@ -1,6 +1,6 @@
 // Importamos las dependencias.
 import jwt from 'jsonwebtoken';
-
+import getPool from '../db/getPool.js';
 // Importamos los errores.
 import {
   notAuthenticatedError,
@@ -31,6 +31,11 @@ const authUser = async (req, res, next) => {
       console.log(err);
       invalidCredentialsError();
     }
+
+    // !por revisar
+    // if (tokenInfo.iat < req.user.update_date) {
+    //   notAuthenticatedError();
+    // }
 
     // creamos una propiedad que sera igual que la info del token
     req.user = tokenInfo;
