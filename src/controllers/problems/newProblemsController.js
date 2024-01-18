@@ -1,22 +1,22 @@
 // Importamos los modelos.
-import insertProblemsModel from "../../models/problems/insertProblemsModel.js";
+import insertProblemsModel from '../../models/problems/insertProblemsModel.js';
 //importamos modulo fs para crear directorio y poder guardar la foto ahi
-import fs from "fs/promises";
+import fs from 'fs/promises';
 
 //Como __dirname no está en ES modules:
-import * as url from "url";
+import * as url from 'url';
 //fileURLToPath sirve para que el formato valga para todos (windows, mac, linux)
 //creo una nueva ruta y le digo que salga de estas dos carpetas y vaya a la raiz
-const __dirname = url.fileURLToPath(new URL("../../", import.meta.url));
-import sharp from "sharp";
-import path from "path";
+const __dirname = url.fileURLToPath(new URL('../../', import.meta.url));
+import sharp from 'sharp';
+import path from 'path';
 //import sharp from "sharp";
-import { nanoid } from "nanoid";
+import { nanoid } from 'nanoid';
 // Importamos los servicios.
-import validateSchemaUtil from "../../utils/validateSchemaUtil.js";
+import validateSchemaUtil from '../../utils/validateSchemaUtil.js';
 
 // Importamos el esquema.
-import newProblemsSchemas from "../../schemas/problems/newProblemsSchemas.js";
+import newProblemsSchemas from '../../schemas/problems/newProblemsSchemas.js';
 //  para crear el directorio lo usamos aqui por que no nos funciona la importacion
 //  por ahora lo dejamos asi :(
 const createdpath = async (path) => {
@@ -35,7 +35,7 @@ const newProblemsController = async (req, res, next) => {
     //si en la peticion hay un archivo y el archivo se llama photo(en postman poner lo mismo)
     if (req.files && req.files.photo) {
       // Creo el path del directorio uploads
-      const uploadsDir = path.join(__dirname, "/uploads");
+      const uploadsDir = path.join(__dirname, '/uploads');
 
       // Creo el directorio si no existe
       await createdpath(uploadsDir);
@@ -58,7 +58,7 @@ const newProblemsController = async (req, res, next) => {
         try {
           await fs.writeFile(path, photo);
         } catch {
-          console.error("No se pudo guardar la imagen");
+          console.error('No se pudo guardar la imagen');
         }
       };
       let photo = req.files.photo; //guardo en constante photo la imagen recibida en body
@@ -77,7 +77,7 @@ const newProblemsController = async (req, res, next) => {
     );
 
     res.send({
-      status: "ok",
+      status: 'ok',
       data: {
         entry: {
           id_district,
