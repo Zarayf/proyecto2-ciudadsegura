@@ -20,7 +20,7 @@ router.post('/user/register', newUserController);
 // Acceso administrador
 router.post('/user/login', loginController);
 // devuelve el perfil de usuario
-router.get('/user/:userId', authUser, userProfileController);
+router.get('/user', authUser, userProfileController);
 
 //  enviar email de recuperacion de contraseña
 router.post('/user/password/recover', sendRecoverPassController);
