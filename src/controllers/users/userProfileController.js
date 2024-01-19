@@ -2,9 +2,7 @@ import selectUserByIdModel from '../../models/users/selectUserByIdModel.js';
 
 const userProfileController = async (req, res, next) => {
   try {
-    const { userId } = req.params;
-
-    const user = await selectUserByIdModel(userId);
+    const user = await selectUserByIdModel(req.user.id);
 
     res.send({
       status: 'ok',
