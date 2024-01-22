@@ -9,7 +9,6 @@ const selectUserByEmailModel = async (email) => {
   const [user] = await pool.query(`SELECT * FROM user WHERE email = ?`, [
     email,
   ]);
-  console.log(user);
   // El array de usuarios solo podrá contener un único usuario dado que el email
   // no puede repetirse. Retornamos al usuario que se encuentra en la posición 0,
   // es decir, retornamos el objeto en lugar de retornar un array con un elemento.

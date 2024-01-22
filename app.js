@@ -27,5 +27,5 @@ app.use(routes);
 app.use(errorController);
 // ponemos a escuchar el servidor
 app.listen(PORT, () => {
-  console.log(`servidor escuchando en http:localhost:${PORT}`);
+  console.log(`servidor escuchando en http://localhost:${PORT}`);
 });

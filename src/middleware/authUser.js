@@ -20,7 +20,8 @@ const authUser = async (req, res, next) => {
       notAuthenticatedError();
     }
 
-    const token = authorization.split(' ')[1];
+    //const token = authorization.split(' ')[1]; lo comentamos porque de esta manera no vuelca datos en el front (LIDIA)
+    const token = authorization;
 
     // Variable que almacenará la info del token.
     let tokenInfo;
@@ -28,7 +29,7 @@ const authUser = async (req, res, next) => {
     try {
       tokenInfo = jwt.verify(token, SECRET);
     } catch (err) {
-      console.log(err);
+
       invalidCredentialsError();
     }
 

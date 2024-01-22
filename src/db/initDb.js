@@ -76,10 +76,6 @@ async function modifiDb() {
 
     console.log('Tablas creadas correctamente');
 
-   
-
-    
-
 
     //Creamos usuario administrador
     await pool.query(`INSERT INTO  user (user_name, pass, email ) VALUES
