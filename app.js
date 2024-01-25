@@ -20,7 +20,7 @@ app.use(express.json());
 app.use(cors());
 app.use(fileUpload());
 // indicamos a express la ruta del archivo estatico
-app.use('/uploads', express.static('./uploads'));
+app.use('/uploads', express.static('./src/uploads'));
 // usamos e indica el router
 app.use(routes);
 // le indicamos a express el controlador de errores
