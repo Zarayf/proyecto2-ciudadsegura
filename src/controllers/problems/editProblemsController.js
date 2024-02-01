@@ -10,16 +10,16 @@ const editProblemsController = async (req, res, next) => {
     /*Queriamos aprovechar para editar la entrada. 
     De momento sólo se puede cambiar estado (Pendiente o resuelto)*/
     const { problem_status } = req.body;
-
+    console.log(req.body);
     //llamo a la base de datos y le paso los cambios recogidos en el req.body
     await editProblemsModel(id_problem, problem_status);
 
     //Responder con un objeto de la entrada con los cambios nuevos
     res.send({
-      status: "datos actualizados",
+      status: "Resuelto",
       data: {
         problem: {
-          problem_status,
+          problem_status: true,
           solution_date: new Date(),
         },
       },
