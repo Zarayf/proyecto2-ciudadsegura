@@ -1,13 +1,12 @@
 // Importamos la función que devuelve una conexión con la base de datos.
 import getPool from '../../db/getPool.js';
 
-const selectAllProblemsModel = async (id_district) => {
+const selectProblems = async () => {
   const pool = await getPool();
 
   const [problems] = await pool.query(
     `
                 SELECT 
-                    P.id_district,
                     P.id_problem,
                     P.title,
                     P.description, 
@@ -15,12 +14,11 @@ const selectAllProblemsModel = async (id_district) => {
                     P.photo,
                     P.place_detail,
                     P.problem_status
-                FROM problem P WHERE P.id_district= ?
+                FROM problem P 
             `,
-    [id_district]
   );
 
   return problems;
 };
 
-export default selectAllProblemsModel;
+export default selectProblems;
