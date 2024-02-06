@@ -14,8 +14,11 @@ const selectAllProblemsModel = async (id_district) => {
                     P.create_date,
                     P.photo,
                     P.place_detail,
-                    P.problem_status
-                FROM problem P WHERE P.id_district= ?
+                    P.problem_status,
+                    district.district_name
+                FROM problem P
+                JOIN district ON p.id_district = district.id_district 
+                WHERE P.id_district=?
             `,
     [id_district]
   );
