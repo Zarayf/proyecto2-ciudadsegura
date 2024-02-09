@@ -79,7 +79,7 @@ async function modifiDb() {
 
     //Creamos usuario administrador
     await pool.query(`INSERT INTO  user (user_name, pass, email ) VALUES
-     ('tanjiro','1a4D5p$','tanjiro@correo.com')
+     ('admin','1Abcdefgh@.','admin@correo.com')
     `);
     //Creamos city
     await pool.query(`INSERT INTO city(city_name) VALUES ('narnia')
